@@ -83,6 +83,7 @@ public class SingleLoginService extends IntentService {
                                         RealmUtils.getInstance().deleteUserInfo();//删除用户信息
                                     }
                                     AssociationData.info.clear();
+
                                 }
                             }
                         }, new Consumer<Throwable>() {
