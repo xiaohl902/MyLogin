@@ -1,8 +1,11 @@
 package com.andysong.mylogin;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.content.ContextCompat;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.util.Log;
@@ -11,12 +14,15 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.andysong.mylogin.base.BaseActivity;
+import com.andysong.mylogin.base.ToolbarBaseActivity;
 import com.andysong.mylogin.common.db.AssociationData;
 import com.andysong.mylogin.common.db.RealmUtils;
 import com.andysong.mylogin.common.network.ApiResponse;
 import com.andysong.mylogin.common.network.RetrofitHelper;
 import com.andysong.mylogin.common.network.SingleLoginService;
 import com.andysong.mylogin.utils.CommonUitls;
+import com.andysong.mylogin.utils.StatusBarUtil;
+import com.r0adkll.slidr.Slidr;
 import com.squareup.picasso.Picasso;
 
 import java.net.ConnectException;
@@ -44,7 +50,8 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void swipeBack() {
-
+        //右滑删除
+//        Slidr.attach(this);
     }
 
     @Override
@@ -52,15 +59,20 @@ public class MainActivity extends BaseActivity {
         return R.layout.activity_main;
     }
 
+
+    /**
+     * hl  设置状态栏
+     */
     @Override
     protected void setStatusBar() {
-
+        StatusBarUtil.setTransparent(this);
     }
 
     @Override
     protected void initToolBar() {
 
     }
+
 
     @Override
     protected void initViews(Bundle savedInstanceState) {
@@ -91,6 +103,9 @@ public class MainActivity extends BaseActivity {
                 break;
             case R.id.ac_btn_staServer://启动服务
                 SingleLoginService.start(MainActivity.this);//启动服务
+                break;
+            case R.id.ac_btn_staNewActivity://新起一个Activity
+                startActivity(new Intent(MainActivity.this,NewActivity.class));
                 break;
         }
     }
@@ -326,5 +341,7 @@ public class MainActivity extends BaseActivity {
             CommonUitls.showToast(MainActivity.this, "发生了不可预期的问题");
         }
     }
+
+
 
 }
